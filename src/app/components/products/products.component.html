@@ -1,0 +1,16 @@
+<main>
+  <section>
+    <div
+      class="container sm:w-full md:w-[80%] my-4 py-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 p-7"
+    >
+      @for (product of productList(); track product.id) {
+      <div class="rounded-lg border dark:bg-gray-500 bg-black text-white">
+        <img [src]="product.image" class="w-full h-80" [alt]="product.title" />
+        <h2 class="text-center p-5">{{ product.title | trimText : 3 }}</h2>
+      </div>
+      }@empty {
+      <h2>Loading products ...</h2>
+      }
+    </div>
+  </section>
+</main>

@@ -24,9 +24,39 @@ export class NavbarComponent implements OnInit {
       initFlowbite();
     });
 
+    if(isPlatformBrowser(this.PLATFORM_ID)){
+
+      if(localStorage.getItem("theme")){
+          this.darkTheme = true;
+          document.documentElement.classList.add("dark");
+        }else{
+          this.darkTheme = false;
+          document.documentElement.classList.remove("dark");
+        }
+    }
+
+    
   }
   
 
-  
+  changeTheme() : void{
+    if(isPlatformBrowser(this.PLATFORM_ID))
+    {
+      if(localStorage.getItem("theme")){
+        localStorage.removeItem("theme");
+      }else{
+        localStorage.setItem("theme", "dark");
+      }
+
+      if(localStorage.getItem("theme")){
+        this.darkTheme = true;
+        document.documentElement.classList.add("dark");
+      }else{
+        this.darkTheme = false;
+        document.documentElement.classList.remove("dark");
+      }
+    }
+    
+  }
 
 }

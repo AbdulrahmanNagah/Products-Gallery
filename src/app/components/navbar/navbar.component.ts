@@ -1,24 +1,27 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, computed, inject, OnInit, PLATFORM_ID, Signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { FlowbiteService } from '../../core/services/flowbite.service';
 import { ProductsService } from '../../core/services/products.service';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
 
-  private readonly _FlowbiteService = inject(FlowbiteService)
-  private readonly _ProductsService = inject(ProductsService)
+  private readonly _FlowbiteService = inject(FlowbiteService);
+  private readonly _ProductsService = inject(ProductsService);
+   readonly _CartService = inject(CartService);
 
   private readonly PLATFORM_ID = inject(PLATFORM_ID);
+
   
   darkTheme : boolean = false;
   sortBg : number = 0;

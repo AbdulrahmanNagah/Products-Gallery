@@ -1,0 +1,56 @@
+<main>
+  <div class="container sm:w-full md:w-[80%] my-4 py-10 flex flex-col gap-5">
+    @if ( myCart !== null && myCart.length > 0 ) {
+    <div class="flex justify-between items-center">
+      <div class="flex flex-col">
+        <span class="dark:text-gray-300 text-gray-800 text-[20px] font-medium"
+          >Total Items : {{ totalItems }}
+        </span>
+        <span
+          class="dark:text-yellow-300 text-yellow-800 text-[25px] font-medium"
+          >Total price : {{ totalPrice | currency : "GBP" }}
+        </span>
+      </div>
+      <button
+        (click)="removeAllItems()"
+        class="bg-red-500 py-3 px-8 hover:bg-red-600 text-white transition-colors duration-200 rounded-lg"
+      >
+        Clear Cart
+      </button>
+    </div>
+    } @for (product of myCart; track product.id) {
+    <div
+      class="flex flex-wrap flex-col lg:flex-row items-center gap-10 text-white dark:bg-gray-400 bg-black rounded-lg overflow-hidden"
+    >
+      <div class="w-1/2 lg:w-1/4">
+        <img [src]="product.image" class="w-full" [alt]="product.title" />
+      </div>
+      <div class="w-4/6 py-5 flex flex-col gap-2">
+        <h2 class="text-[25px] md:text-[30px] capitalize">
+          {{ product.title | trimText : 3 }}
+        </h2>
+
+        <span class="dark:text-red-700 text-red-400 text-[18px] capitalize">
+          Category : {{ product.category }}
+        </span>
+        <span class="dark:text-yellow-700 text-yellow-300 text-[18px]">
+          Price : {{ product.price | currency : "GBP" }}
+        </span>
+
+        <span
+          (click)="removeItem($index)"
+          class="text-red-500 text-lg cursor-pointer"
+          ><i class="fa-solid fa-trash"></i> remove</span
+        >
+      </div>
+    </div>
+    } @empty {
+    <h2 class="text-center text-[30px] dark:text-white">
+      No items in your cart :(
+    </h2>
+    } @if ( myCart !== null && myCart.length > 0 ) {
+
+    <button class="btn-main">Order</button>
+    }
+  </div>
+</main>

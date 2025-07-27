@@ -43,11 +43,21 @@
         >
           <li>
             <a
+              routerLinkActive="text-blue-500 dark:text-blue-500"
               routerLink="/products"
-              class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
+              class="block py-2 px-3 dark:text-white rounded-sm md:p-0"
               aria-current="page"
               >Products</a
             >
+          </li>
+          <li>
+            <a
+              routerLinkActive="text-blue-500 dark:text-blue-500"
+              routerLink="/cart"
+              class="block py-2 px-3 dark:text-white rounded-sm md:p-0 md:dark:bg-transparent"
+              aria-current="page"
+              ><i class="fa-solid fa-cart-shopping fa-xl"></i>
+            </a>
           </li>
           <li>
             <button
@@ -154,9 +164,10 @@
         class="cursor-pointer dark:text-white text-center"
       >
         @if (darkTheme) {
-        <i class="fa-solid fa-moon fa-xl"></i>
-        }@else{
         <i class="fa-solid fa-sun fa-xl"></i>
+
+        }@else{
+        <i class="fa-solid fa-moon fa-xl"></i>
         }
       </span>
     </div>

@@ -30,6 +30,13 @@
           />
           <h2 class="text-center p-5">{{ product.title | trimText : 3 }}</h2>
         </div>
+
+        <button
+          (click)="_CartService.addToCart(product)"
+          class="btn-main w-10/12 mx-auto block my-2"
+        >
+          Add to cart
+        </button>
       </div>
       }@empty {
       <h2 class="dark:text-white text-center text-[30px]">
@@ -40,7 +47,7 @@
 
     } @else {
     <h2 class="dark:text-white text-center text-[30px]">
-      The product is not found :(
+      The product you are searching for is not found :(
     </h2>
     }
   </section>

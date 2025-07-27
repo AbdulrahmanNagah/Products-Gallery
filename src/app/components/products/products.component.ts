@@ -6,6 +6,7 @@ import { TrimTextPipe } from '../../core/pipes/trim-text.pipe';
 import { ProductsService } from '../../core/services/products.service';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -18,6 +19,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 
   private readonly _ProductsService = inject(ProductsService);
+   readonly _CartService = inject(CartService);
 
   productList : Signal<IProduct[]> = computed(() => this._ProductsService.productList())
   
@@ -33,6 +35,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
         }
       })
   }
+
+
+
 
   ngOnDestroy(): void {
       this.productsSub.unsubscribe();

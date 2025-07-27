@@ -9,12 +9,18 @@ import { IProduct } from '../interfaces/iproduct';
 export class ProductsService {
 
   productList : WritableSignal<IProduct[]> = signal([]);
+  baseUrl : string = "https://fakestoreapi.com";
   
   constructor(private _HttpClient : HttpClient) { }
 
   getAllProducts() : Observable<any>
   {
-    return this._HttpClient.get(`https://fakestoreapi.com/products`);
+    return this._HttpClient.get(`${this.baseUrl}/products`);
+  }
+
+  getProductDetails(productId : string) : Observable<any>
+  {
+    return this._HttpClient.get(`${this.baseUrl}/products/${productId}`)
   }
   
 }

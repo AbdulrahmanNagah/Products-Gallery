@@ -22,8 +22,14 @@
       @for (product of productList() | search : searchInput(); track product.id)
       {
       <div class="rounded-lg border dark:bg-gray-500 bg-black text-white">
-        <img [src]="product.image" class="w-full h-80" [alt]="product.title" />
-        <h2 class="text-center p-5">{{ product.title | trimText : 3 }}</h2>
+        <div [routerLink]="['/products', product.id]">
+          <img
+            [src]="product.image"
+            class="w-full h-80"
+            [alt]="product.title"
+          />
+          <h2 class="text-center p-5">{{ product.title | trimText : 3 }}</h2>
+        </div>
       </div>
       }@empty {
       <h2 class="dark:text-white text-center text-[30px]">

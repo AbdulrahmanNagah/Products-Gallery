@@ -1,16 +1,41 @@
 <main>
   <section>
+    <!-- ^========= search input ======== -->
+
+    <div class="max-w-md mx-auto my-5">
+      <input
+        type="search"
+        id="default-search"
+        class="block w-full p-4 ps-10 text-sm shadow-lg text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-black focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-white"
+        placeholder="Search for products ...."
+        required
+        [(ngModel)]="searchInput"
+      />
+    </div>
+
+    <!-- ^========= products ======== -->
+
+    @if ((productList() | search : searchInput()).length > 0) {
     <div
       class="container sm:w-full md:w-[80%] my-4 py-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 p-7"
     >
-      @for (product of productList(); track product.id) {
+      @for (product of productList() | search : searchInput(); track product.id)
+      {
       <div class="rounded-lg border dark:bg-gray-500 bg-black text-white">
         <img [src]="product.image" class="w-full h-80" [alt]="product.title" />
         <h2 class="text-center p-5">{{ product.title | trimText : 3 }}</h2>
       </div>
       }@empty {
-      <h2>Loading products ...</h2>
+      <h2 class="dark:text-white text-center text-[30px]">
+        Loading products ...
+      </h2>
       }
     </div>
+
+    } @else {
+    <h2 class="dark:text-white text-center text-[30px]">
+      The product is not found :(
+    </h2>
+    }
   </section>
 </main>

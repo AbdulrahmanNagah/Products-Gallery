@@ -1,8 +1,10 @@
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { FlowbiteService } from '../../core/services/flowbite.service';
-import { initFlowbite } from 'flowbite';
-import { RouterLink } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { initFlowbite } from 'flowbite';
+import { IProduct } from '../../core/interfaces/iproduct';
+import { FlowbiteService } from '../../core/services/flowbite.service';
+import { ProductsService } from '../../core/services/products.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,10 +16,12 @@ import { isPlatformBrowser } from '@angular/common';
 export class NavbarComponent implements OnInit {
 
   private readonly _FlowbiteService = inject(FlowbiteService)
+  private readonly _ProductsService = inject(ProductsService)
 
   private readonly PLATFORM_ID = inject(PLATFORM_ID);
   
   darkTheme : boolean = false;
+  sortBg : number = 0;
 
    ngOnInit(): void {
      this._FlowbiteService.loadFlowbite((flowbite) => {
@@ -58,5 +62,36 @@ export class NavbarComponent implements OnInit {
     }
     
   }
+
+  sortByName() : void{
+    this._ProductsService.getAllProducts().subscribe({
+      next: (res : IProduct[]) => {
+        this._ProductsService.productList.set(res.sort((a,b) => a.title.localeCompare(b.title)));
+        this.sortBg = 1;
+      }
+    })
+  }
+  sortByPrice(htl : boolean) : void{
+   if(htl) {
+     this._ProductsService.getAllProducts().subscribe({
+      next: (res : IProduct[]) => {
+        this._ProductsService.productList.set(res.sort((a,b) => b.price - a.price));
+        this.sortBg = 2;
+      }
+    })
+   }
+   else{
+     this._ProductsService.getAllProducts().subscribe({
+      next: (res : IProduct[]) => {
+        this._ProductsService.productList.set(res.sort((a,b) => a.price - b.price));
+        this.sortBg = 3;
+      }
+    })
+   }
+  }
+
+
+
+  
 
 }

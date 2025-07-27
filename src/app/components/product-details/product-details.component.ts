@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { ProductsService } from '../../core/services/products.service';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -14,6 +15,7 @@ import { ProductsService } from '../../core/services/products.service';
 export class ProductDetailsComponent implements OnInit {
 
   private readonly _ProductsService = inject(ProductsService);
+  readonly _CartService = inject(CartService);
 
   private readonly _ActivatedRoute = inject(ActivatedRoute);
 

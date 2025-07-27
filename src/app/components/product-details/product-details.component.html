@@ -23,6 +23,12 @@
         <span class="dark:text-yellow-700 text-yellow-300 text-[18px]">
           Price : {{ productDetails.price | currency : "GBP" }}
         </span>
+        <button
+          (click)="_CartService.addToCart(productDetails)"
+          class="btn-main"
+        >
+          Add to cart
+        </button>
       </div>
     </div>
   </div>

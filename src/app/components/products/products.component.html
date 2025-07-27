@@ -22,7 +22,7 @@
       @for (product of productList() | search : searchInput(); track product.id)
       {
       <div class="rounded-lg border dark:bg-gray-500 bg-black text-white">
-        <div [routerLink]="['/products', product.id]">
+        <div [routerLink]="['/products', product.id]" class="cursor-pointer">
           <img
             [src]="product.image"
             class="w-full h-80"
